@@ -2,7 +2,8 @@ package chess;
 
 /*
  * @author Travis Harrell (tsh61)
- * @author Elizaveta Belaya(edb81)
+ * @author Elizaveta Belaya(edb81)wrbfbfg
+ * fuck
  */
 
 public class Chess {
