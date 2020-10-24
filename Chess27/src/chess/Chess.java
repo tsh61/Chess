@@ -35,30 +35,34 @@ public class Chess {
 			 // ask for another input? Recursion?
 		 }
 	
-		String i_pos = splitted[0];
-		String d_pos = splitted[1];			
+		 
+		String i_pos = splitted[0]; //a1 initial position
+		String d_pos = splitted[1];	//a5 desired position
 	//	String draw  = splitted[2]; // What if the third element is "draw"?
 		int k = d_pos.charAt(1) - i_pos.charAt(1);			
 	//	System.out.println("Initial position: " + i_pos +" "+ "Desired position: " + d_pos); // + " Draw? "+ draw);
-		char i_let  = i_pos.charAt(0);
-		char i_num  = i_pos.charAt(1);
+		char i_let  = i_pos.charAt(0); //a
+		char i_num  = i_pos.charAt(1); //1
 		 	
 	/* Small test for a pawn move. Pawn can move only forward => only i_num is incremented */			
 		for(int i=0;i<k;i++) {			
 			i_num++;				
 			String pos = Character.toString(i_let) + Character.toString(i_num);
-			if(isOccupied(pos)==true || isSameCol(i_pos,d_pos)==true) { //case when cell is occupied or of the same color
+			
+			if(isOccupied(pos)==true && isSameCol(i_pos,d_pos)==true) { //case when cell is occupied and of the same color
 				System.out.println("Illegal move, try again");	
 				//ask for another input? Recursion?
-			}else {
-				// case when it is an opponent's piece => should replace it
+			}else if(isOccupied(pos)==false){ //empty
+				// just move it
+			}else{
+				//case when it's occupied with opponent's piece => should replace it!
 			}
 		} 
 				
 		sc.close();		
 	}
 	
-	private static boolean isSameCol(String i_pos, String d_pos) {		
+	private static boolean isSameCol(String i_pos, String d_pos) {	//check first chars of pieces at initial and desired positions 'w' vs 'b'
 		if(i_pos.charAt(0)==d_pos.charAt(0)) {
 			return true;
 		}else {
@@ -66,7 +70,7 @@ public class Chess {
 		}
 	}
 	
-	private static boolean isOccupied(String pos) {		
+	private static boolean isOccupied(String pos) {	//check if the desired position occupied, don't think we need it tho
 		if(board.get(pos)=="") {
 			return true;
 		}else {
