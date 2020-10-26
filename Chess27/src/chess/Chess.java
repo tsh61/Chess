@@ -1,7 +1,9 @@
 package chess;
 
+import figures.*;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Arrays;
 /* 
  * @author Travis Harrell (tsh61)
  * @author Elizaveta Belaya (edb81)
@@ -14,138 +16,237 @@ import java.util.Scanner;
 //	      ##    ##    ##    ## 4
 //	   ##    ##    ##    ##    3 
 //	   wp wp wp wp wp wp wp wp 2
-//	   wR wB wN wQ wK wB wN wR 1
+//	   wR wN wB wQ wK wB wN wR 1
 //      a  b  c  d  e  f  g  h
  
 public class Chess {
 	
-	public static HashMap<String, String> board = new HashMap<String, String>(64); //81?
+	//public static HashMap<String, String> board = new HashMap<String, String>(64); //81?
 	
+	public static Piece[][] board = new Piece[8][8];
+	
+	public static Piece[][] getBoard(){
+		return Chess.board;
+	}
+	
+	public static int turnCount = 0;
+	
+	//test
 	public static void main(String[] args) {
 		
-			chessBoard();
-			printBoard();
-					
+		//Piece p = new Pawn(false);
+		
+		initializeBoard();
+		
+		printBoard();
+		
+		start();
+		
+	}
+	
+	public static void start() {
+		
+		boolean end = false;
+		boolean turnColor = false;
+		
+		while(!end) {
+		
+		//System.out.println(turnCount);
+		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter initial position and desired posotion: ");
-		String [] splitted = sc.nextLine().split("\\s+");
 		
-		 if(splitted.length>3)	{
-			 System.out.println("Invalid input.");
-			 // ask for another input? Recursion?
-		 }
-	
-		 
-		String i_pos = splitted[0]; //a1 initial position
-		String d_pos = splitted[1];	//a5 desired position
-	//	String draw  = splitted[2]; // What if the third element is "draw"?
-		int k = d_pos.charAt(1) - i_pos.charAt(1);			
-	//	System.out.println("Initial position: " + i_pos +" "+ "Desired position: " + d_pos); // + " Draw? "+ draw);
-		char i_let  = i_pos.charAt(0); //a
-		char i_num  = i_pos.charAt(1); //1
-		 	
-	/* Small test for a pawn move. Pawn can move only forward => only i_num is incremented */			
-		for(int i=0;i<k;i++) {			
-			i_num++;				
-			String pos = Character.toString(i_let) + Character.toString(i_num);
+		
+		switch(turnCount%2) {
+			case(0):
+				System.out.println("White's move:");
+				turnColor = false;
+				break;
+			case(1):
+				System.out.println("Black's move:");
+				turnColor = true;
+				break;
+		}
+
+		String[] splitted = sc.nextLine().split("\\s+");
+		
+		if(splitted.length == 0) {
+			System.out.println("Illegal move, try again");
+			start();
+		}
+		
+		else if(splitted.length == 0 || splitted[0].length() < 2 || splitted.length > 4) {
+			System.out.println("Illegal move, try again");
+			start();	
+		}
+		
+		else if(splitted[0].equals("resign")) {
 			
-			if(isOccupied(pos)==true && isSameCol(i_pos,d_pos)==true) { //case when cell is occupied and of the same color
-				System.out.println("Illegal move, try again");	
-				//ask for another input? Recursion?
-			}else if(isOccupied(pos)==false){ //empty
-				// just move it
-			}else{
-				//case when it's occupied with opponent's piece => should replace it!
+			if(turnCount%2 == 0) {
+				System.out.println("Black wins");
+				end = true;
 			}
-		} 
-				
-		sc.close();		
-	}
-	
-	private static boolean isSameCol(String i_pos, String d_pos) {	//check first chars of pieces at initial and desired positions 'w' vs 'b'
-		if(i_pos.charAt(0)==d_pos.charAt(0)) {
-			return true;
-		}else {
-			return false;
+			else {
+				System.out.println("White wins");
+				end = true;
+			}
 		}
-	}
-	
-	private static boolean isOccupied(String pos) {	//check if the desired position occupied, don't think we need it tho
-		if(board.get(pos)=="") {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	public static void chessBoard() {
-	
-		board.put("a1","wR"); board.put("a2","wp");
-		board.put("b1","wN"); board.put("b2","wp");
-		board.put("c1","wB"); board.put("c2","wp");
-		board.put("d1","wQ"); board.put("d2","wp");
-		board.put("e1","wK"); board.put("e2","wp");
-		board.put("f1","wB"); board.put("f2","wp");
-		board.put("g1","wN"); board.put("g2","wp");
-		board.put("h1","wR"); board.put("h2","wp");
-		 
-		board.put("a8","bR"); board.put("a7","bp");
-		board.put("b8","bN"); board.put("b7","bp");
-		board.put("c8","bB"); board.put("c7","bp");
-		board.put("d8","bQ"); board.put("d7","bp");
-		board.put("e8","bK"); board.put("e7","bp");
-		board.put("f8","bB"); board.put("f7","bp");
-		board.put("g8","bN"); board.put("g7","bp");
-		board.put("h8","bR"); board.put("h7","bp");
 		
-		board.put("a3",""); board.put("b3","");	board.put("c3","");	board.put("d3","");	board.put("e3","");	board.put("f3",""); board.put("g3","");	board.put("h3","");		
-		board.put("a4",""); board.put("b4","");	board.put("c4","");	board.put("d4","");	board.put("e4","");	board.put("f4","");	board.put("g4","");	board.put("h4","");	
-		board.put("a5","");	board.put("b5","");	board.put("c5","");	board.put("d5","");	board.put("e5","");	board.put("f5","");	board.put("g5","");	board.put("h5","");	
-		board.put("a6","");	board.put("b6","");	board.put("c6","");	board.put("d6","");	board.put("e6","");	board.put("f6","");	board.put("g6","");	board.put("h6","");	
+		else {
+			int x1 = Character.getNumericValue(splitted[0].charAt(0)) - 10;
+			int y1 = 7 - Character.getNumericValue(splitted[0].charAt(1) - 1);
+			int x2 = Character.getNumericValue(splitted[1].charAt(0)) - 10;
+			int y2 = 7 - Character.getNumericValue(splitted[1].charAt(1) - 1);
+		
+			Piece initial = board[y1][x1];
+			//Piece destination = board[y2][x2];
+			
+			
+			
+			if(initial == null || initial.getColor() != turnColor) {
+				System.out.println("Illegal move, try again");
+				start();
+			}
+		
+			boolean initialColor = initial.getColor();
+		
+			//Pawn test = new Pawn(true);
+		
+			//boolean output = test.getColor();
+		
+			//System.out.println(output);
+		
+		
+			if(initial instanceof Pawn) {
+				initial = new Pawn(initialColor);
+				if(initial.validMove(splitted[0], splitted[1]) == true){
+					//System.out.println("true");
+					board[y2][x2] = initial;
+					board[y1][x1] = null;
+					printBoard();
+					turnCount++;
+					start();
+				}
+				else {
+					System.out.println("Illegal move, try again");
+					start();
+				}
+				
+			}
+			else if(initial instanceof Knight) {
+				initial = new Knight(initialColor);
+				if(initial.validMove(splitted[0], splitted[1]) == true){
+					//System.out.println("true");
+					board[y2][x2] = initial;
+					board[y1][x1] = null;
+					printBoard();
+					turnCount++;
+					start();
+				}
+				else {
+					System.out.println("Illegal move, try again");
+					start();
+				}
+			}
+			
+		
+			sc.close();
+			}
+		sc.close();
+		}
+	}
+	
+	public static void initializeBoard() {
+		board[0][0] = new Rook(true);	board[7][0] = new Rook(false);
+		board[0][1] = new Knight(true); board[7][1] = new Knight(false);
+		board[0][2] = new Bishop(true); board[7][2] = new Bishop(false);
+		board[0][3] = new Queen(true); board[7][3] = new Queen(false);
+		board[0][4] = new King(true); board[7][4] = new King(false);
+		board[0][5] = new Bishop(true); board[7][5] = new Bishop(false);
+		board[0][6] = new Knight(true); board[7][6] = new Knight(false);
+		board[0][7] = new Rook(true); board[7][7] = new Rook(false);
+		
+		board[1][0] = new Pawn(true); board[6][0] = new Pawn(false);
+		board[1][1] = new Pawn(true); board[6][1] = new Pawn(false);
+		board[1][2] = new Pawn(true); board[6][2] = new Pawn(false);
+		board[1][3] = new Pawn(true); board[6][3] = new Pawn(false);
+		board[1][4] = new Pawn(true); board[6][4] = new Pawn(false);
+		board[1][5] = new Pawn(true); board[6][5] = new Pawn(false);
+		board[1][6] = new Pawn(true); board[6][6] = new Pawn(false);
+		board[1][7] = new Pawn(true); board[6][7] = new Pawn(false);
 	}
 	
 	public static void printBoard() {
 		
-		//for (String i : board.keySet()) {
-		 // System.out.println(i);
-	//	  System.out.println("cell: " + i + " figure: " + board.get(i));			 
-	//}
-	
-	System.out.print(board.get("a8")+ " ");
-	System.out.print(board.get("b8")+ " ");
-	System.out.print(board.get("c8")+ " ");
-	System.out.print(board.get("d8")+ " ");
-	System.out.print(board.get("e8")+ " ");
-	System.out.print(board.get("f8")+ " ");
-	System.out.print(board.get("g8")+ " ");
-	System.out.print(board.get("h8")+ " " + "\n");
-	System.out.print(board.get("a7")+ " ");
-	System.out.print(board.get("b7")+ " ");
-	System.out.print(board.get("c7")+ " ");
-	System.out.print(board.get("d7")+ " ");
-	System.out.print(board.get("e7")+ " ");
-	System.out.print(board.get("f7")+ " ");
-	System.out.print(board.get("g7")+ " ");
-	System.out.print(board.get("h7")+ " ");
-	System.out.println("");
-	System.out.println("");
-	System.out.println("");
-	System.out.println("");
-	System.out.print(board.get("a2")+ " ");
-	System.out.print(board.get("b2")+ " ");
-	System.out.print(board.get("c2")+ " ");
-	System.out.print(board.get("d2")+ " ");
-	System.out.print(board.get("e2")+ " ");
-	System.out.print(board.get("f2")+ " ");
-	System.out.print(board.get("g2")+ " ");
-	System.out.print(board.get("h2")+ " " + "\n");	
-	System.out.print(board.get("a1")+ " ");	
-	System.out.print(board.get("b1")+ " ");
-	System.out.print(board.get("c1")+ " ");
-	System.out.print(board.get("d1")+ " ");
-	System.out.print(board.get("e1")+ " ");
-	System.out.print(board.get("f1")+ " ");
-	System.out.print(board.get("g1")+ " ");
-	System.out.print(board.get("h1")+ " " + "\n"); 
-				
-	}	
+		int count = 8;
+		
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < 8; j++) {
+				Piece currPiece = board[i][j];
+				if(currPiece instanceof Piece) {
+					if(currPiece instanceof Pawn) {
+						if(currPiece.black == false) {
+							System.out.print("wp ");
+						}
+						else {
+							System.out.print("bp ");
+						}
+					}
+					else if(currPiece instanceof Rook) {
+						if(currPiece.black == false) {
+							System.out.print("wR ");
+						}
+						else {
+							System.out.print("bR ");
+						}
+					}
+					else if(currPiece instanceof Knight) {
+						if(currPiece.black == false) {
+							System.out.print("wN ");
+						}
+						else {
+							System.out.print("bN ");
+						}
+					}
+					else if(currPiece instanceof Bishop) {
+						if(currPiece.black == false) {
+							System.out.print("wB ");
+						}
+						else {
+							System.out.print("bB ");
+						}
+					}
+					else if(currPiece instanceof Queen) {
+						if(currPiece.black == false) {
+							System.out.print("wQ ");
+						}
+						else {
+							System.out.print("bQ ");
+						}
+					}
+					else if(currPiece instanceof King) {
+						if(currPiece.black == false) {
+							System.out.print("wK ");
+						}
+						else {
+							System.out.print("bK ");
+						}
+					}
+				}
+				else {
+					if (j%2 == 0 && i%2 ==1) {
+						System.out.print("## ");
+					}
+					else if (j%2 == 1 && i%2 == 0){
+						System.out.print("## ");
+					}
+					else {
+						System.out.print("   ");
+					}
+				}
+			}
+			System.out.println(count);
+			count--;
+		}
+		System.out.println(" a  b  c  d  e  f  g  h");
+	}
 }
