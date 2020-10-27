@@ -16,8 +16,7 @@ public class Knight extends Piece{
 		int x2 = Character.getNumericValue(dest.charAt(0)) - 10;
 		int y2 = Character.getNumericValue(dest.charAt(1) - 1);
 		
-		
-		if(board[y2][x2] == null || !(board[y2][x2].getColor() == board[y1][x1].getColor())) {
+		if(board[y2][x2] == null) {
 			if(x2 == x1-2 && y2 == y1-1) {
 				return true;
 			}
@@ -49,7 +48,41 @@ public class Knight extends Piece{
 				return false;
 			}
 		}
+		
+		else if (board[y2][x2] != null){
+			if((super.black == false && board[y2][x2].black == false) || (super.black == true && board[y2][x2].black == true)) {
+				if(x2 == x1-2 && y2 == y1-1) {
+					return true;
+				}
+				else if(x2 == x1-1 && y2 == y1-2) {
+					return true;
+				}
+			
+				else if(x2 == x1+2 && y2 == y1+1) {
+					return true;
+				}
+				else if(x2 == x1+1 && y2 == y1+2) {
+					return true;
+				}
+			
+				else if(x2 == x1+2 && y2 == y1-1) {
+					return true;
+				}
+				else if(x2 == x1+1 && y2 == y1-2) {
+					return true;
+				}
+			
+				else if(x2 == x1-1 && y2 == y1+2) {
+					return true;
+				}
+				else if(x2 == x1-2 && y2 == y1+1) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
 		return false;
 	}
-	
 }

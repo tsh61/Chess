@@ -108,8 +108,6 @@ public class Chess {
 			}
 		
 			boolean initialColor = initial.getColor();
-			
-			//System.out.println(board[y2][x1].black == board[y1][x1].black);
 		
 			//Pawn test = new Pawn(true);
 		

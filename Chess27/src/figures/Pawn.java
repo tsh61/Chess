@@ -28,17 +28,17 @@ public class Pawn extends Piece{
 			if(x1 == x2) {
 				if(board[y2][x2] == null) {
 					if(y2 == y1-1) {
-						hasMoved = true;
+						board[y1][x1].hasMoved = true;
 						return true;
 					}
-					if((y2 == y1 - 2) && hasMoved == false && board[y1-1][x1] == null) {
-						hasMoved = true;
+					if((y2 == y1 - 2) && board[y1][x1].hasMoved == false && board[y1-1][x1] == null) {
+						board[y1][x1].hasMoved = true;
 						return true;
 					}
 				}
 			}
-			else if((Math.abs(x1 - x2) == 1) && (y2 == y1-1) && (board[y1-1][x1] != null) && (board[y1-1][x1].black == true)) {
-				hasMoved = true;
+			else if((Math.abs(x1 - x2) == 1) && (y2 == y1-1) && (board[y1-1][x2] != null) && (board[y1-1][x2].getColor() == true)) {
+				board[y1][x1].hasMoved = true;
 				return true;
 			}
 			else {
@@ -49,16 +49,16 @@ public class Pawn extends Piece{
 			if(x1 == x2) {
 				if(board[y2][x2] == null) {
 					if(y2 == y1+1) {
-						hasMoved = true;
+						board[y1][x1].hasMoved = true;
 						return true;
 					}
-					if((y2 == y1 + 2) && hasMoved == false && board[y1+1][x1] == null) {
-						hasMoved = true;
+					if((y2 == y1 + 2) && board[y1][x1].hasMoved == false && board[y1+1][x1] == null) {
+						board[y1][x1].hasMoved = true;
 						return true;
 					}
 				}
 			}
-			else if((Math.abs(x1 - x2) == 1) && (y2 == y1+1) && board[y1+1][x1] != null && board[y1+1][x1].black == false) {
+			else if((Math.abs(x1 - x2) == 1) && (y2 == y1+1) && board[y1+1][x2] != null && board[y1+1][x2].getColor() == false) {
 				hasMoved = true;
 				return true;
 			}
@@ -71,3 +71,5 @@ public class Pawn extends Piece{
 	}
 	
 }
+
+
