@@ -17,7 +17,7 @@ public class Knight extends Piece{
 		int y2 = Character.getNumericValue(dest.charAt(1) - 1);
 		
 		
-		if(board[y2][x2] == null || (board[y2][x2].black && board[y1][x1].black) == false) {
+		if(board[y2][x2] == null || !(board[y2][x2].getColor() == board[y1][x1].getColor())) {
 			if(x2 == x1-2 && y2 == y1-1) {
 				return true;
 			}

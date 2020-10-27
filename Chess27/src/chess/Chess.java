@@ -108,6 +108,8 @@ public class Chess {
 			}
 		
 			boolean initialColor = initial.getColor();
+			
+			//System.out.println(board[y2][x1].black == board[y1][x1].black);
 		
 			//Pawn test = new Pawn(true);
 		
@@ -132,6 +134,7 @@ public class Chess {
 				}
 				
 			}
+			
 			else if(initial instanceof Knight) {
 				initial = new Knight(initialColor);
 				if(initial.validMove(splitted[0], splitted[1]) == true){
@@ -148,7 +151,70 @@ public class Chess {
 				}
 			}
 			
-		
+			else if(initial instanceof Rook) {
+				initial = new Rook(initialColor);
+				if(initial.validMove(splitted[0], splitted[1]) == true){
+					//System.out.println("true");
+					board[y2][x2] = initial;
+					board[y1][x1] = null;
+					printBoard();
+					turnCount++;
+					start();
+				}
+				else {
+					System.out.println("Illegal move, try again");
+					start();
+				}
+			}
+			
+			else if(initial instanceof Bishop) {
+				initial = new Bishop(initialColor);
+				if(initial.validMove(splitted[0], splitted[1]) == true){
+					//System.out.println("true");
+					board[y2][x2] = initial;
+					board[y1][x1] = null;
+					printBoard();
+					turnCount++;
+					start();
+				}
+				else {
+					System.out.println("Illegal move, try again");
+					start();
+				}
+			}
+			
+			else if(initial instanceof Queen) {
+				initial = new Queen(initialColor);
+				if(initial.validMove(splitted[0], splitted[1]) == true){
+					//System.out.println("true");
+					board[y2][x2] = initial;
+					board[y1][x1] = null;
+					printBoard();
+					turnCount++;
+					start();
+				}
+				else {
+					System.out.println("Illegal move, try again");
+					start();
+				}
+			}
+			
+			else if(initial instanceof King) {
+				initial = new King(initialColor);
+				if(initial.validMove(splitted[0], splitted[1]) == true){
+					//System.out.println("true");
+					board[y2][x2] = initial;
+					board[y1][x1] = null;
+					printBoard();
+					turnCount++;
+					start();
+				}
+				else {
+					System.out.println("Illegal move, try again");
+					start();
+				}
+			}
+			
 			sc.close();
 			}
 		sc.close();

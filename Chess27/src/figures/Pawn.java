@@ -5,7 +5,7 @@ import java.lang.*;
 
 public class Pawn extends Piece{
 	
-	boolean b;
+	//boolean b;
 	
 	public Pawn(boolean b) {
 		super.black = b;
@@ -37,7 +37,7 @@ public class Pawn extends Piece{
 					}
 				}
 			}
-			else if((Math.abs(x1 - x2) == 1) && (y2 == y1-1) && board[y1-1][x1] != null && board[y1-1][x1].black == true) {
+			else if((Math.abs(x1 - x2) == 1) && (y2 == y1-1) && (board[y1-1][x1] != null) && (board[y1-1][x1].black == true)) {
 				hasMoved = true;
 				return true;
 			}
