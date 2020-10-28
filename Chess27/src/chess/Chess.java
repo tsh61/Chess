@@ -16,7 +16,7 @@ import java.util.Scanner;
 //	   wp wp wp wp wp wp wp wp 2
 //	   wR wN wB wQ wK wB wN wR 1
 //      a  b  c  d  e  f  g  h
- //hello
+ //hello there
 public class Chess {
 	
 	//public static HashMap<String, String> board = new HashMap<String, String>(64); //81?
