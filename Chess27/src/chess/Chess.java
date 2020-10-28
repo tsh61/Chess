@@ -1,9 +1,7 @@
 package chess;
 
 import figures.*;
-import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Arrays;
 /* 
  * @author Travis Harrell (tsh61)
  * @author Elizaveta Belaya (edb81)

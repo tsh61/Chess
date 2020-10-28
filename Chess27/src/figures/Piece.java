@@ -1,5 +1,10 @@
 package figures;
 
+/* 
+ * @author Travis Harrell (tsh61)
+ * @author Elizaveta Belaya (edb81)
+ */
+
 public abstract class Piece {
 	
 	public boolean black;

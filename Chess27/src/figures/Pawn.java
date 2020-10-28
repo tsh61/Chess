@@ -1,7 +1,12 @@
 package figures;
 
 import chess.*;
-import java.lang.*;
+//import java.lang.*;
+
+/* 
+ * @author Travis Harrell (tsh61)
+ * @author Elizaveta Belaya (edb81)
+ */
 
 public class Pawn extends Piece{
 	
