@@ -8,11 +8,11 @@ import chess.*;
  */
 
 public class Queen extends Piece{
-	
+
 	public Queen(boolean b) {
 		super.black = b;
 	}
-	
+
 	public boolean validMove(String orig, String dest) {
 		Piece[][] board = Chess.getBoard();
 		int x1 = Character.getNumericValue(orig.charAt(0)) - 10;
@@ -21,7 +21,7 @@ public class Queen extends Piece{
 		int y2 = 7 - Character.getNumericValue(dest.charAt(1) - 1);
 		int diagonalCount = Math.abs(y2 - y1);
 		int verticalCount = 0;
-		
+
 		if(x1==x2 || y1 == y2 || (Math.abs(y2-y1)!=Math.abs(x2-x1))) { //vertical move
 			if(x1 == x2) { //vertical
 				verticalCount = Math.abs(y2 - y1);
@@ -33,36 +33,36 @@ public class Queen extends Piece{
 				return false;
 			}
 
-			if(board[y2][x2]!=null) {
-				if((board[y2][x2].black == false && board[y1][x1].black == false)|| (board[y2][x2].black == true && board[y1][x1].black == true)) {
+		if(board[y2][x2]!=null) {
+			if((board[y2][x2].black == false && board[y1][x1].black == false)|| (board[y2][x2].black == true && board[y1][x1].black == true)) {
+				return false;
+			}
+		}
+
+		for(int i = 1; i<verticalCount; i++){
+			if(x1 == x2 && y1 > y2){ //up
+				if(board[y1-i][x1]!=null){
 					return false;
 				}
 			}
-
-			for(int i = 1; i<verticalCount; i++){
-				if(x1 == x2 && y1 > y2){ //up
-					if(board[y1-i][x1]!=null){
-						return false;
-					}
+			else if(x1 == x2 && y1 < y2){ //down
+				if(board[y1+i][x1]!=null){
+					return false;
 				}
-				else if(x1 == x2 && y1 < y2){ //down
-					if(board[y1+i][x1]!=null){
-						return false;
-					}
-				}
-				else if(y1 == y2 && x1 < x2){ //right
-					if(board[y1][x1+i]!=null){
-						return false;
-					}
-				}
-				else if(y1 == y2 && x1 > x2){ //left
-					if(board[y1][x1-i]!=null){
-						return false;
-					}
-				} 
 			}
+			else if(y1 == y2 && x1 < x2){ //right
+				if(board[y1][x1+i]!=null){
+					return false;
+				}
+			}
+			else if(y1 == y2 && x1 > x2){ //left
+				if(board[y1][x1-i]!=null){
+					return false;
+				}
+			} 
+		}
 
-			return true;
+		return true;
 		}
 		else {
 			if(board[y2][x2]!=null) {
@@ -96,5 +96,5 @@ public class Queen extends Piece{
 			return true;
 		}
 	}
-	
+
 }

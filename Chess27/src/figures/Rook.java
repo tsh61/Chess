@@ -64,7 +64,7 @@ public class Rook extends Piece{
 				}
 			} 
 		}
-
+		board[y1][x1].hasMoved = true;
 		return true;
 
 	}

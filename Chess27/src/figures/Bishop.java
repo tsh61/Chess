@@ -13,7 +13,7 @@ public class Bishop extends Piece{
 		super.black = b;
 	}
 
-	public boolean validMove(String orig, String dest) {
+	public boolean validMove(String orig, String dest) {//f8 a3
 
 		Piece[][] board = Chess.getBoard();
 		int x1 = Character.getNumericValue(orig.charAt(0)) - 10;
@@ -28,6 +28,7 @@ public class Bishop extends Piece{
 
 		if(board[y2][x2]!=null) {
 			if((board[y2][x2].black == false && board[y1][x1].black == false)|| (board[y2][x2].black == true && board[y1][x1].black == true)) {
+			//	System.out.println("Bishop1");
 				return false;
 			}
 		}
@@ -35,21 +36,25 @@ public class Bishop extends Piece{
 		for(int i = 1; i<count; i++) {
 			if(x1>x2 && y1>y2){ //up and left c1 a3
 				if(board[y1-i][x1-i]!=null) {
+				//	System.out.println("Bishop2");
 					return false;
 				}
 			}
 			else if(x1<x2 && y1>y2){ //up and right c1 e3
 				if(board[y1-i][x1+i]!=null) { 
+					//System.out.println("Bishop3");
 					return false;
 				}
 			}
 			else if(x1>x2 && y1<y2){ //down and left c8 a6
 				if(board[y1+i][x1-i]!=null) {
+				//	System.out.println("Bishop4");
 					return false;
 				}
 			}
 			else if(x1<x2 && y1<y2){ //down and right c8 e6
 				if(board[y1+i][x1+i]!=null) {
+				//	System.out.println("Bishop5");
 					return false;
 				}
 			}

@@ -9,6 +9,9 @@ public abstract class Piece {
 	
 	public boolean black;
 	public boolean hasMoved = false;
+	public boolean twoSquare = false;
+	
+	public int turnNum;
 	
 	public abstract boolean validMove(String origin, String destination);
 	

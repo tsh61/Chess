@@ -173,11 +173,13 @@ public class Chess {
 						
 						if(check(bKingPos)==true) {//do not need dest of pawn
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}else if(turnCount%2!=0) {//black   
 
 						if(check(wKingPos)==true) {//do not need dest of pawn //e6 a3
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}
 					
@@ -217,11 +219,13 @@ public class Chess {
 						
 						if(check(bKingPos)==true) {//do not need dest of pawn
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}else if(turnCount%2!=0) {//black   
 
 						if(check(wKingPos)==true) {//do not need dest of pawn //e6 a3
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}
 					/*if(turnCount%2==0){//white   
@@ -257,11 +261,13 @@ public class Chess {
 						
 						if(check(bKingPos)==true) {//do not need dest of pawn
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}else if(turnCount%2!=0) {//black   
 
 						if(check(wKingPos)==true) {//do not need dest of pawn //e6 a3
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}	
 				/*	if(turnCount%2==0){//white   
@@ -300,11 +306,13 @@ public class Chess {
 						
 						if(check(bKingPos)==true) {//do not need dest of pawn
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}else if(turnCount%2!=0) {//black   
 
 						if(check(wKingPos)==true) {//do not need dest of pawn //e6 a3
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}	
 					
@@ -343,11 +351,13 @@ public class Chess {
 						
 						if(check(bKingPos)==true) {//do not need dest of pawn
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}else if(turnCount%2!=0) {//black   
 
 						if(check( wKingPos)==true) {//do not need dest of pawn //e6 a3
 							System.out.println("Check");
+							System.out.println("\n");
 						}
 					}
 					
@@ -398,11 +408,13 @@ public class Chess {
 							wKingPos = splitted[1];
 							if(check(bKingPos)==true){
 								System.out.println("Check");
+								System.out.println("\n");
 							}
 						}else if(turnCount%2!=0) {//black king position changes
 							bKingPos = splitted[1];
 							if(check(wKingPos)==true){
 								System.out.println("Check");
+								System.out.println("\n");
 							}
 						}	
 						turnCount++;
